@@ -1,15 +1,14 @@
 #include "ft_printf.h"
 
-int ft_string(va_list ap, t_flags flags, int count)
+int ft_str_null(t_flags flags, int count)
 {
     char *s;
     int dot;
     int len;
 
-    s = va_arg(ap, char *);
-    len = ft_strlen(s);
+    s = "(null)";
+    len = 6;
     dot = flags.dot;
-
     if ((flags.dot >= len || flags.dot == -1) && flags.width <= len)
     {
         ft_putstr_fd(s, 1);

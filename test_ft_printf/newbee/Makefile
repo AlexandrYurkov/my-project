@@ -5,6 +5,7 @@ SOURCE	=	ft_char.c \
 			ft_type.c \
 			ft_width.c \
 			ft_spec.c\
+			ft_str.c\
 			ft_stardot.c\
 			ft_int.c\
 			ft_zero.c\
@@ -13,6 +14,7 @@ SOURCE	=	ft_char.c \
 			ft_itoa_hex.c\
 			ft_hex.c\
 			ft_pointr.c\
+			ft_str_null.c\
 
 HEADER	=	ft_printf.h libft/libft.h
 

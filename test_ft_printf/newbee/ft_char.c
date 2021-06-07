@@ -3,8 +3,10 @@
 int ft_char(va_list ap, t_flags flags, int count)
 {
     char c;
-
-    c = (char)va_arg(ap, int);
+    if (flags.type == '%')
+        c = '%';
+    else
+        c = (char)va_arg(ap, int);
     count += 1;
     if (flags.width <= 1)
         write(1, &c, 1);
@@ -14,7 +16,13 @@ int ft_char(va_list ap, t_flags flags, int count)
         ft_width((flags.width) - 1);
         count += flags.width;
     }
-    if (flags.minus == 0 && flags.width > 1)
+    if (flags.minus == 0 && flags.width > 1 && c == '%' && flags.zero == 1)
+    {
+        ft_zero((flags.width) - 1);
+        write(1, &c, 1);
+        count += flags.width;
+    }
+    if (flags.minus == 0 && flags.width > 1 && flags.zero == 0)
     {
         ft_width((flags.width) - 1);
         write(1, &c, 1);

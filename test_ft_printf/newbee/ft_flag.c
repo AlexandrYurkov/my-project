@@ -2,9 +2,10 @@
 
 int ft_flag(const char *str, va_list ap, int i, t_flags *flags)
 {
+    int j = 0;
     while (str[i])
     {
-        if (str[i] == '0')
+        if (str[i] == '0' && j == 0)// ошибка записывает ноль
             flags->zero = 1;
         if (str[i] == '-')
         {
@@ -32,6 +33,7 @@ int ft_flag(const char *str, va_list ap, int i, t_flags *flags)
             break;
         }
         i++;
+        j++;
     }
     return (i);
 }

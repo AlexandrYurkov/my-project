@@ -34,11 +34,6 @@ int ft_parse(const char *str, va_list ap)
                 }
                 flags.space = 1;
             }
-            if (str[i] == '%')
-            {
-                write(1, &str[i], 1);
-                count++;
-            }
             i = ft_flag(str, ap, i, &flags);
             count += ft_type(ap, flags); // сделать проверку на type
         }
