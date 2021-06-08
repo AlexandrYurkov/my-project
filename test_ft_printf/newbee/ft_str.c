@@ -42,7 +42,7 @@ int ft_str(va_list ap, t_flags flags, int count)
             else
                 return (count);
         }
-        else if (flags.dot < len && flags.dot > 0 && flags.width < flags.dot)
+        else if (flags.dot < len && flags.dot > 0 && flags.width <= flags.dot)
         {
             while (dot--)
                 write(1, &(*s++), 1);

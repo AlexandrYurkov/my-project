@@ -19,25 +19,25 @@ int ft_stardot(const char *str, va_list ap, int i, t_flags **flags)
     }
     else
     {
-        while (str[i] >= '0' && str[i] <= '9')
-        {
-            i++;
-            j++;
-        }
-        tmp = malloc((j + 1) * sizeof(char));
-        if (!tmp)
-            return (0);
-        i -= j;
-        j = 0;
-        while (str[i] >= '0' && str[i] <= '9')
-        {
-            tmp[j] = str[i];
-            i++;
-            j++;
-        }
-        tmp[j] = '\0';
-        flag = ft_atoi(tmp);
-        free(tmp);
+            while (str[i] >= '0' && str[i] <= '9')
+            {
+                i++;
+                j++;
+            }
+            tmp = malloc((j + 1) * sizeof(char));
+            if (!tmp)
+                return (0);
+            i -= j;
+            j = 0;
+            while (str[i] >= '0' && str[i] <= '9')
+            {
+                tmp[j] = str[i];
+                i++;
+                j++;
+            }
+            tmp[j] = '\0';
+            flag = ft_atoi(tmp);
+            free(tmp);
     }
     return (flag);
 }

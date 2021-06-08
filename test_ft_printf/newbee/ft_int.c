@@ -11,9 +11,9 @@ int ft_int(va_list ap, t_flags flags, int count)
     digit = ft_itoa(d);
     tmp = ft_itoa(d * (-1));
     len = ft_strlen(digit);
-    if (flags.dot <= len && flags.width <= len && flags.zero == 0) // тест 20 поподает сюда
+    if (flags.dot <= len && flags.width <= len) // тест 20 попадает сюда
     {
-        if (flags.dot == len)
+        if (flags.dot == len && flags.zero == 0)
         {
             if (d < 0)
             {
@@ -27,16 +27,19 @@ int ft_int(va_list ap, t_flags flags, int count)
                 ft_zero((flags.dot) - len);
                 ft_putstr_fd(digit, 1);
             }
+            count += flags.dot;
         }
         else if (d == 0 && flags.dot == 0)
-            {
-                free(digit);
-                free(tmp);
-                return (count);
-            }
+        {
+            free(digit);
+            free(tmp);
+            return (count);
+        }
         else
+        {
             ft_putstr_fd(digit, 1);
-        count += len;
+            count += len;
+        }
     }
     else if (flags.dot > len && (flags.width <= flags.dot)) //если число отриц то выносим минус за точность
     {
@@ -54,17 +57,59 @@ int ft_int(va_list ap, t_flags flags, int count)
         }
         count += flags.dot;
     }
-    else if (flags.dot <= len && flags.width > len && flags.minus == 0 && flags.zero == 0)
+    else if (flags.dot <= len && flags.width > len)
     {
-        ft_width((flags.width) - len);
-        ft_putstr_fd(digit, 1);
-        count += flags.width;
-    }
-    else if (flags.dot <= len && flags.width > len && flags.minus == 1)
-    {
-        ft_putstr_fd(digit, 1);
-        ft_width((flags.width) - len);
-        count += flags.width;
+        if (flags.dot == 0 && d == 0)
+        {
+            ft_width(flags.width);
+            count += flags.width;
+        }
+        else if (flags.zero == 0 && flags.minus == 0 && d != 0)
+        {
+            ft_width((flags.width) - len);
+            ft_putstr_fd(digit, 1);
+            count += flags.width;
+        }
+        else if (flags.zero == 0 && flags.minus == 1 && d != 0)
+        {
+            ft_putstr_fd(digit, 1);
+            ft_width((flags.width) - len);
+            count += flags.width;
+        }
+        else if (flags.zero == 1 && flags.dot == -1)
+        {
+            if (d < 0)
+            {
+                write(1, "-", 1);
+                ft_zero((flags.width) - len);
+                ft_putstr_fd(tmp, 1);
+                count++;
+            }
+            else
+            {
+                ft_zero((flags.width) - len);
+                ft_putstr_fd(digit, 1);
+            }
+            count += flags.width;
+        }
+        else if (flags.zero == 1 && flags.dot > -1)
+        {
+            ft_width((flags.width) - len);
+            ft_putstr_fd(digit, 1);
+            count += flags.width;
+        }
+        else if (flags.zero == 0 && flags.dot <= 0 && d == 0 && flags.minus == 0)
+        {
+            ft_width((flags.width) - len);
+            ft_putstr_fd(digit, 1);
+            count += flags.width;
+        }
+        else if (flags.zero == 0 && flags.dot <= 0 && d == 0 && flags.minus == 1)
+        {
+            ft_putstr_fd(digit, 1);
+            ft_width((flags.width) - len);
+            count += flags.width;
+        }
     }
     else if (flags.dot > len && (flags.width > flags.dot) && flags.minus == 1)
     {
@@ -102,22 +147,6 @@ int ft_int(va_list ap, t_flags flags, int count)
         else
         {
             ft_zero((flags.dot) - len);
-            ft_putstr_fd(digit, 1);
-        }
-        count += flags.width;
-    }
-    else if (flags.width > len && flags.dot == -1 && flags.zero == 1)
-    {
-        if (d < 0)
-        {
-            write(1, "-", 1);
-            ft_zero((flags.width) - len);
-            ft_putstr_fd(tmp, 1);
-            count++;
-        }
-        else
-        {
-            ft_zero((flags.width) - len);
             ft_putstr_fd(digit, 1);
         }
         count += flags.width;

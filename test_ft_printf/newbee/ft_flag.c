@@ -2,7 +2,11 @@
 
 int ft_flag(const char *str, va_list ap, int i, t_flags *flags)
 {
-    int j = 0;
+    int j;
+    int k;
+
+    k = 0;
+    j = 0;
     while (str[i])
     {
         if (str[i] == '0' && j == 0)// ошибка записывает ноль
@@ -12,12 +16,13 @@ int ft_flag(const char *str, va_list ap, int i, t_flags *flags)
             flags->minus = 1;
             flags->zero = 0;
         }
-        if (str[i] == '*' || ((str[i] >= '0' && str[i] <= '9') && flags->width == 0))
+        if (str[i] == '*' || ((str[i] >= '0' && str[i] <= '9') && flags->width == 0 && k == 0))
         {
             flags->width = ft_stardot(str, ap, i, &flags);
         }
         if (str[i] == '.')
         {
+            k = 1;
             i++;
             if (str[i] == '*' || (str[i] >= '0' && str[i] <= '9'))
                 flags->dot = ft_stardot(str, ap, i, &flags);
