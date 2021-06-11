@@ -15,6 +15,7 @@ int ft_stardot(const char *str, va_list ap, int i, t_flags **flags)
         {
             (*flags)->p_star = 1;
             flag *= (-1);
+            (*flags)->zero = 0;
         }
     }
     else
@@ -37,6 +38,7 @@ int ft_stardot(const char *str, va_list ap, int i, t_flags **flags)
             }
             tmp[j] = '\0';
             flag = ft_atoi(tmp);
+            if (tmp)
             free(tmp);
     }
     return (flag);

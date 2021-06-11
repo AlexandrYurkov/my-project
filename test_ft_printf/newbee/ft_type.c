@@ -17,7 +17,5 @@ int ft_type(va_list ap, t_flags flags)
         return (ft_hex(ap, flags, count));
     if (flags.type  == 'p')
         return (ft_pointr(ap, flags, count));
-   /* if (flags.type  == '%')
-        return (ft_char(ap, flags, count));*/
     return (count);
 }

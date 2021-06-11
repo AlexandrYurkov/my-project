@@ -3,13 +3,15 @@
 int ft_str(va_list ap, t_flags flags, int count)
 {
     char *s;
+    int i;
     int dot;
     int len;
 
+    i = 0;
     s = va_arg(ap, char *);
     if (!s)
     {
-        ft_str_null(flags, count);
+        count += ft_str_null(flags, count);
     }
     else
     {
@@ -20,13 +22,13 @@ int ft_str(va_list ap, t_flags flags, int count)
             ft_putstr_fd(s, 1);
             count += len;
         }
-        else if ((flags.dot >= len || flags.dot < 0) && flags.width > len && flags.minus == 0)
+        else if ((flags.dot >= len || flags.dot == -1) && flags.p_star == 0 && flags.width > len && flags.minus == 0)
         {
             ft_width((flags.width) - len);
             ft_putstr_fd(s, 1);
             count += flags.width;
         }
-        else if ((flags.dot >= len || flags.dot < 0) && flags.width > len && flags.minus == 1)
+        else if ((flags.dot >= len || flags.dot == -1) && flags.width > len && (flags.p_star == 1 || flags.minus == 1))
         {
             ft_putstr_fd(s, 1);
             ft_width((flags.width) - len);
@@ -45,20 +47,29 @@ int ft_str(va_list ap, t_flags flags, int count)
         else if (flags.dot < len && flags.dot > 0 && flags.width <= flags.dot)
         {
             while (dot--)
-                write(1, &(*s++), 1);
+            {
+                write(1, &(s[i]), 1);
+                i++;
+            }
             count += flags.dot;
         }
         else if (flags.dot < len && flags.dot > 0 && flags.width > flags.dot && flags.minus == 0)
         {
             ft_width((flags.width) - (flags.dot));
             while (dot--)
-                write(1, &(*s++), 1);
+            {
+                write(1, &(s[i]), 1);
+                i++;
+            }
             count += flags.width;
         }
         else if (flags.dot < len && flags.dot > 0 && flags.width > flags.dot && flags.minus == 1)
         {
             while (dot--)
-                write(1, &(*s++), 1);
+            {
+                write(1, &(s[i]), 1);
+                i++;
+            }
             ft_width((flags.width) - (flags.dot));
             count += flags.width;
         }

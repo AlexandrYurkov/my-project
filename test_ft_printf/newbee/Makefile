@@ -29,7 +29,7 @@ AR		=	ar rcs
 CFLAGS	=	-Wall -Wextra -Werror
 
 %.o: %.c ${HEADER}
-			gcc ${CFLAGS} -Ilibft -c $< -o ${<:.c=.o}
+			gcc  -Ilibft -c $< -o ${<:.c=.o}
 
 ${NAME}:	${OBJECTS}
 			make -C libft
@@ -50,6 +50,6 @@ fclean:		clean
 re:			fclean all
 
 debug:		re
-			gcc -g ${CFLAGS} *.c ./libft/libft.a
+			gcc -g  *.c ./libft/libft.a
 
 .PHONY:		all clean fclean bonus

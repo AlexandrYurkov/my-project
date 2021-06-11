@@ -29,6 +29,7 @@ int ft_pointr(va_list ap, t_flags flags, int count)
         ft_width(flags.width - len);
         count += flags.width;
     }
+    if (digit)
     free(digit);
     return (count);
 }

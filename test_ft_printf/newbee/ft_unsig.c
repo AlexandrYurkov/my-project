@@ -34,13 +34,13 @@ int ft_unsig(va_list ap, t_flags flags, int count)
         ft_putstr_fd(digit, 1);
         count += flags.dot;
     }
-    else if (flags.dot <= len && flags.width > len && flags.minus == 0 && (flags.dot > -1 || flags.zero == 0))
+    else if (flags.dot <= len && flags.width > len && flags.minus == 0 && flags.p_star == 0 && (flags.dot > -1 || flags.zero == 0))
     {
         ft_width((flags.width) - len);
         ft_putstr_fd(digit, 1);
         count += flags.width;
     }
-    else if (flags.dot <= len && flags.width > len && flags.minus == 1)
+    else if (flags.dot <= len && flags.width > len && (flags.minus == 1 || flags.p_star == 1))
     {
         ft_putstr_fd(digit, 1);
         ft_width((flags.width) - len);
@@ -66,6 +66,7 @@ int ft_unsig(va_list ap, t_flags flags, int count)
         ft_putstr_fd(digit, 1);
         count += flags.width;
     }
+    if (digit)
     free(digit);
     return (count);
 }
